@@ -344,7 +344,6 @@ function printChart1(data){
 			return [parseFloat(k),parseFloat(d[k])]
 		})		
 		}})		 
-	console.log(dataToPlot);
 	nv.addGraph(function() {
 		d3.select('#chart1')
             .datum(dataToPlot)
@@ -468,6 +467,8 @@ $(function() {
   });
   
   d3.select('svg').on("dblclick", function() { //Onclick function
+	console.log("in");
+	console.log(d3.event);
     console.log(d3.event.explicitOriginalTarget.__data__.id);
 	pushOrRemove(country_to_display,d3.event.explicitOriginalTarget.__data__.id);
 	printChart(map.data);
