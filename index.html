@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
+	<title> IVIS18 - Project 2 </title>
+</head>
+
+<body>
+<div class="container">
+<!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">IVIS18 - Project 2 </a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Analytic Trail <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="trail1.html">Trail 1</a></li>
+                  <li><a href="trail2.html">Trail 2</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+ 
+              <li  ><a href="visualization.html">Visualization</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+	<div class="row">
+		<p class="text-center">In this website we are visualizing data from <a href="http://www.worldvaluessurvey.org/wvs.jsp">WVS</a> and <a href="https://www.gapminder.org/">Gapminder.</a> <br /> 
+		We used a couple of library base on d3.js : <a href="https://github.com/yaph/d3-geomap">d3-geomap </a> for the map and <a href="https://github.com/novus/nvd3">NVD3</a> for the charts.<br />
+
+		<br />
+		We are visualizing datas from 1981 to 2009 with the following 33 countries and 21 parameters:</p>
+		
+	</div>
+	
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">Countries</div>
+			<ul class="list-group">
+			<li class="list-group-item">Algeria</li>
+			<li class="list-group-item">Argentina</li>
+			<li class="list-group-item">Australia</li>
+			<li class="list-group-item">Belarus</li>
+			<li class="list-group-item">Brazil</li>
+			<li class="list-group-item">Burkina Faso</li>
+			<li class="list-group-item">Canada</li>
+			<li class="list-group-item">Chile</li>
+			<li class="list-group-item">China</li>
+			<li class="list-group-item">Czech Republic</li>
+			<li class="list-group-item">Finland</li>
+			<li class="list-group-item">France</li>
+			<li class="list-group-item">Germany</li>
+			<li class="list-group-item">Hungary</li>
+			<li class="list-group-item">India</li>
+			<li class="list-group-item">Iran</li>
+			<li class="list-group-item">Italy</li>
+			<li class="list-group-item">Japan</li>
+			<li class="list-group-item">Mexico</li>
+			<li class="list-group-item">Netherlands</li>
+			<li class="list-group-item">Nigeria</li>
+			<li class="list-group-item">Norway</li>
+			<li class="list-group-item">Russia</li>
+			<li class="list-group-item">Singapore</li>
+			<li class="list-group-item">Slovakia</li>
+			<li class="list-group-item">South Africa</li>
+			<li class="list-group-item">South Korea</li>
+			<li class="list-group-item">Spain</li>
+			<li class="list-group-item">Sweden</li>
+			<li class="list-group-item">Switzerland</li>
+			<li class="list-group-item">Turkey</li>
+			<li class="list-group-item">United Kingdom</li>
+			<li class="list-group-item">United States</li>
+			</ul>
+		
+		 
+		</div>
+		</div>
+		<div class="col-md-4">
+		<div class="panel panel-default">
+		  <div class="panel-heading">Parameters from WVS</div>
+			<ul class="list-group">
+			 		<li class="list-group-item">Importance in Life - Family</li>
+					<li class="list-group-item">Importance in Life - Friends</li>
+					<li class="list-group-item">Importance in Life - Leisure time</li>
+					<li class="list-group-item">Importance in Life - Politics</li>
+					<li class="list-group-item">Importance in Life - Work</li>	 
+					<li class="list-group-item">Importance in Life - Religon</li>
+					<li class="list-group-item">Important child qualities - Independence</li>
+					<li class="list-group-item">Important child qualities - Hard work</li>
+					<li class="list-group-item">Important child qualities - Feeling of responsibility</li>
+					<li class="list-group-item">Important child qualities - Imagination</li>
+					<li class="list-group-item">Important child qualities - Tolerance and respect for other people</li>
+					<li class="list-group-item">Important child qualities - Thrift saving money and things</li>
+					<li class="list-group-item">Important child qualities - Determination perseverance</li>
+					<li class="list-group-item">Important child qualities - Religious faith</li>
+					<li class="list-group-item">Important child qualities - Unselfishness</li>
+					<li class="list-group-item">Important child qualities - Obedience</li>	
+			</ul>
+		</div>
+		
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">Parameters from Gapminder</div>
+			<ul class="list-group">
+			 			  <li class="list-group-item">GDP per Capita ($)</li>
+						  <li class="list-group-item">Life expectancy (year)</li>
+						  <li class="list-group-item">Energy production (toe)</li>
+						  <li class="list-group-item">Energy use (toe)</li>
+						  <li class="list-group-item">Agricultural land (% of land area)</li>
+			</ul>
+		</div>
+		</div>
+		<div class="col-md-2"></div>
+	
+	
+	</div>
+	
+
+	
+	
+</div><!-- /.container -->
+
+</body>
+
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="vendor/horizontalTimeline/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="vendor/horizontalTimeline/css/style.css"> <!-- Resource style -->
+	<link href="https://d3-geomap.github.io//d3-geomap/css/d3.geomap.css" rel="stylesheet">
+    <link href="vendor/nv.d3.css" rel ="stylesheet">
+	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+
+	
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://d3-geomap.github.io//d3-geomap/vendor/d3.geomap.dependencies.min.js"></script>
+    <script src="https://d3-geomap.github.io//d3-geomap/js/d3.geomap.min.js"></script>
+	<script src="vendor/horizontalTimeline/js/modernizr.js"></script> <!-- Modernizr -->
+	<script src="vendor/horizontalTimeline/js/main.js"></script> <!-- Resource jQuery -->
+	<script src="vendor/nv.d3.min.js" > </script>
+	<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+	
+	<title> IVIS18 - Project 2 </title>
+</head>
+		
+			<style>
+
+			#chart svg {
+			  height: 400px;
+			}
+			strong { font-weight: bold; }
+
+			</style>
+<body>
+<div class="container">
+<!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">IVIS18 - Project 2 </a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Analytic Trail <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="trail1.html">Trail 1</a></li>
+                  <li><a href="trail2.html">Trail 2</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+ 
+              <li  class="active"><a href="#">Visualization</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+	<div class="row">
+			<div class="col-md-4">
+		<form class="form-inline" style="padding-top: 30px">
+	
+				Data to display on the map :
+
+				<select class="form-control selectpicker" id="selected_data_type">
+				
+				  <optgroup label="Important in life">
+
+					<option active value="A001" >A001 - Family </option>
+					<option value="A002">A002 - Friends</option>
+					<option value="A003">A003 - Leisure time</option>
+					<option value="A004">A004 - Politics</option>
+					<option value="A005">A005 - Work</option>
+					<option value="A006">A006 - Religion</option>
+				</optgroup>
+				 <optgroup label="Important child qualities">
+					<option value="A029">A029 - Independence</option>
+					<option value="A030">A030 - Hard work</option>
+					<option value="A032">A032 - Feeling of responsibility </option>
+					<option value="A034">A034 - Imagination </option>
+					<option value="A035">A035 - Tolerance and respect for other people</option>
+					<option value="A038">A038 - Thrift saving money and things</option>
+					<option value="A039">A039 - Determination perseverance</option>
+					<option value="A040">A040 - Religious faith</option>
+					<option value="A041">A041 - Unselfishness</option>
+					<option value="A042">A042 - Obedience</option>
+				</optgroup>
+					
+				 </select>
+		</form>
+		</div>
+
+		<div class="col-md-8">
+			<section class="cd-horizontal-timeline">
+	<div class="timeline">
+		<div class="events-wrapper">
+			<div class="events" id="year_selection">
+				<ol>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1981">1981</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1982">1982</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1983">1983</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1984">1984</a></li>
+					<div style="opacity: 0.5;"> <!-- Data not in the WVS set -->
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1985">1985</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1986">1986</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1987">1987</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1988">1988</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1989">1989</a></li>
+					</div>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1990">1990</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1991">1991</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1992">1992</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1993">1993</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1994">1994</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1995">1995</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1996"  class="selected">1996</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1997">1997</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1998">1998</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/1999">1999</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2000">2000</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2001">2001</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2002">2002</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2003">2003</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2004">2004</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2005">2005</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2006">2006</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2007">2007</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2008">2008</a></li>
+					<li><a href="#" onclick="redrawOnYear($(this).data('date').slice(-4)); return false;"  data-date="01/01/2009">2009</a></li>
+
+				</ol>
+
+				<span class="filling-line" aria-hidden="true"></span>
+			</div> <!-- .events -->
+		</div> <!-- .events-wrapper -->
+			
+		<ul class="cd-timeline-navigation">
+			<li><a href="#0" class="prev inactive">Prev</a></li>
+			<li><a href="#0" class="next">Next</a></li>
+		</ul> <!-- .cd-timeline-navigation -->
+	</div> <!-- .timeline -->
+
+</section>
+		</div>
+
+		
+		
+		
+	</div>
+	
+	<div class="row">
+		<div class="col-md-8" style="border-right: 1px solid #ddd;">
+			<div id="map"></div>
+			<br \>
+			<p class="text-muted"> Importance of <span id ="legend_text" > A001 - Family </span> for each country. 100%: very important - 0% : not important at all.  <br \><br \>
+			 <strong>Double click </strong> on a country to see more details. </p>
+		</div>
+		<div class="col-md-4">
+
+
+
+			<div id="chart">
+			  <svg></svg>
+			</div>
+			<!-- 
+			<div class="panel panel-default">
+			  <div class="panel-heading">Additional informations</div> 
+			  <div class="panel-body" id="gapminder"></div>
+			</div>
+			-->
+			
+			
+		
+		</div>
+	</div>
+	<div class="row">
+	
+	<div class="col-md-2" style="padding-top : 30px; padding-bottom: 30px;">
+	<div class="btn-group-vertical">
+	  <button type="button" class="btn btn-default btn-sm" onclick="printChart1(GDP)" autofocus="true">GDP per Capita ($)</button>
+	  <button type="button" class="btn btn-default btn-sm" onclick="printChart1(life_expt)">Life expectancy (year)</button>
+	  <button type="button" class="btn btn-default btn-sm" onclick="printChart1(energy_produce)">Energy production (toe)</button>
+	  <button type="button" class="btn btn-default btn-sm" onclick="printChart1(energy_use)">Energy use (toe)</button>
+	  <button type="button" class="btn btn-default btn-sm" onclick="printChart1(agriculture_land)">Agricultural land (% of land area)</button>
+
+		
+	  </div> 
+	</div>
+	<div class="col-md-10" style="padding-left : 10px">
+	<svg id="chart1"></svg>
+	</div>
+
+	
+	
+	</div>
+	
+	
+</div><!-- /.container -->
+<script>
+
+
+
+
+var current_year = 1996;
+var country_to_display = [];
+var data_csv;
+var energy_produce;
+var life_expt;
+var GDP;
+var energy_use;
+var agriculture_land;
+
+function pushOrRemove(array, element) {
+    const index = array.indexOf(element);
+    
+    if (index !== -1) {
+        array.splice(index, 1);
+    }
+	else {
+		array.push(element);
+	}
+}
+var format = function(d) {
+    return d3.format(',.02f')(d) + '%';
+}
+
+var format_text = function(d) {
+	switch(d){
+	case 'A001' :
+		return 'Importance in Life - Family';
+	case 'A002':
+		return 'Importance in Life - Friends';
+	case 'A003' :
+		return 'Importance in Life - Leisure time';
+	case 'A004': 
+		return "Importance in Life - Politics";
+	case 'A005': 
+		return "Importance in Life - Work";
+	case 'A006': 
+		return "Importance in Life - Religon";
+	case 'A029': 
+		return "Important child qualities - Independence";
+	case 'A030': 
+		return "Important child qualities - Hard work";
+	case 'A032': 
+		return "Important child qualities - Feeling of responsibility";
+	case 'A034': 
+		return "Important child qualities - Imagination";
+	case 'A035': 
+		return "Important child qualities - Tolerance and respect for other people";
+	case 'A038': 
+		return "Important child qualities - Thrift saving money and things";
+	case 'A039': 
+		return "Important child qualities - Determination perseverance";
+	case 'A040': 
+		return "Important child qualities - Religious faith";
+	case 'A041': 
+		return "Important child qualities - Unselfishness";
+	case 'A042': 
+		return "Important child qualities - Obedience";	
+	default :
+		return d;
+	}
+}
+
+var map = d3.geomap.choropleth()
+    .geofile('https://d3-geomap.github.io//d3-geomap/topojson/world/countries.json')
+    .colors(colorbrewer.YlGn[8])
+    .column('A001')
+    .format(format)
+    .legend(true)
+	.domain([0,100])
+	.duration(300)
+    .unitId('Country');
+
+var chart = nv.models.multiBarHorizontalChart()
+          .x(function(d) { return d.label })
+          .y(function(d) { return d.value })
+		  .forceY([0,100])
+          .showValues(false)           //Show bar value next to each bar.
+          .duration(350)
+          .showControls(false);        //Allow user to switch between "Grouped" and "Stacked" mode.
+      chart.yAxis
+          .tickFormat(format);	
+	  chart.tooltip.headerFormatter(format_text);
+	  
+var chart_gapminder = nv.models.lineChart()
+            .useInteractiveGuideline(true)
+            .x(function(d) { return d[0] })
+            .y(function(d) { return d[1] })
+            .duration(300);
+        //chart_gapminder.xAxis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
+       chart_gapminder.yAxis.tickFormat(d3.format(',.2f'));
+       // chart_gapminder.legend.vers('furious');
+	  
+function printChart(data){
+	data = data.filter(function(d) {return country_to_display.indexOf(d["Country"]) !== -1});
+	var dataToPlot = data.map(function(d){
+		return {
+		"key":d.Country,
+		"values":
+		Object.keys(data[0]).filter(function(k){return k!="Country" && k!="Wave"})
+		.map(		
+		function(k){
+		  return {"label":k,
+		  "value":+d[k]
+		  }
+		})		
+		}})		 
+	nv.addGraph(function() {
+	  d3.select('#chart svg')
+		  .datum(dataToPlot)
+		  .call(chart);
+	  nv.utils.windowResize(chart.update);
+	  return chart;
+	});
+};
+
+
+function printChart1(data){
+	data = data.filter(function(d) {return country_to_display.indexOf(d["Country"]) !== -1});
+	var dataToPlot = data.map(function(d){
+		return {
+		"key":d.Country,
+		"values":
+		Object.keys(data[0]).filter(function(k){return k!="Country" && k!="Label"})
+		.map(		
+		function(k){
+			return [parseFloat(k),parseFloat(d[k])]
+		})		
+		}})		 
+	console.log(dataToPlot);
+	nv.addGraph(function() {
+		d3.select('#chart1')
+            .datum(dataToPlot)
+            .transition().duration(1000)
+            .call(chart_gapminder)
+            .each('start', function() {
+                setTimeout(function() {
+                    d3.selectAll('#chart1 *').each(function() {
+                        if(this.__transition__)
+                            this.__transition__.duration = 1;
+                    })
+                }, 0)
+            });
+        nv.utils.windowResize(chart_gapminder.update);
+	  return chart_gapminder;
+	});
+};
+
+
+d3.csv('output', function(data) {
+	data_csv = data;	
+	data = data.filter(function(d) {return d["Wave"]==3}) //1996
+	
+	/* ----------map------------ */
+	d3.select('#map')
+		.datum(data)
+		.call(map.draw, map);
+		
+	/* -------------graph-------------- */
+	
+	printChart(data);
+});
+
+d3.csv('energy use total.csv', function(data){
+	energy_use =data;
+});
+d3.csv('energy produce total.csv', function(data){
+	energy_produce =data;
+});
+d3.csv('agriculture land.csv', function(data){
+	agriculture_land =data;
+});
+d3.csv('GDPpercapita.csv', function(data){
+	GDP =data;
+	
+});
+d3.csv('life_expectancy.csv', function(data){
+	 life_expt=data;
+});
+
+ 
+
+/*function drawGapminder(year){
+	local_GDP = GDP.filter(function(d) { return country_to_display.indexOf(d["Country"]) !== -1});
+	local_energy_use = energy_use.filter(function(d) { return country_to_display.indexOf(d["Country"]) !== -1});
+	local_energy_produce = energy_produce.filter(function(d) { return country_to_display.indexOf(d["Country"]) !== -1});
+	local_agriculture_land = agriculture_land.filter(function(d) { return country_to_display.indexOf(d["Country"]) !== -1});
+	local_life_expt = life_expt.filter(function(d) { return country_to_display.indexOf(d["Country"]) !== -1});
+	
+	output = "";
+	output += "<a href='#gdp' data-toggle='collapse'> GDP per Capita ($)</a><br \>";
+	output += "<div id='gdp' class='collapse in'>";
+	local_GDP.forEach(function(e){ output += "<p>&nbsp;"+ "<strong>" +e["Country"] +"</strong> : " + d3.format(',.02f')(e[year]) + ' US$' + "</p>"});
+	output += "</div>";
+	
+	output += "<a href='#life' data-toggle='collapse'> Life expectancy (year)</a><br \>";
+	output += "<div id='life' class='collapse in'>";
+	local_life_expt.forEach(function(e){ output += "<p>&nbsp;"+ "<strong>" +e["Country"] +"</strong> : " +e[year] + ' years' + "</p>"});
+	output += "</div>";
+	
+	output += "<a href='#energy_produce' data-toggle='collapse'> Energy production (toe)</a><br \>";
+	output += "<div id='energy_produce' class='collapse in'>";
+	local_energy_produce.forEach(function(e){ output += "<p>&nbsp;"+ "<strong>" +e["Country"] +"</strong> : " + (e[year]) + ' toe' + "</p>"});
+	output += "</div>";
+	
+	output += "<a href='#energy_use' data-toggle='collapse'> Energy use (toe)</a><br \>";
+	output += "<div id='energy_use' class='collapse in'>";
+	local_energy_use.forEach(function(e){ output += "<p>&nbsp;"+ "<strong>" +e["Country"] +"</strong> : " +(e[year]) + ' toe' + "</p>"});
+	output += "</div>";
+	
+	output += "<a href='#agri_land' data-toggle='collapse'> Agricultural land (% of land area)</a><br \>";
+	output += "<div id='agri_land' class='collapse in'>";
+	local_agriculture_land.forEach(function(e){ output += "<p>&nbsp;"+ "<strong>" +e["Country"] +"</strong> : " +d3.format(',.02f')(e[year]) + ' % of land area' + "</p>"});
+	output += "</div>";
+	
+	
+	
+	
+	$("#gapminder").html(output)
+	
+*/
+
+function redrawOnYear(year){
+	year = parseInt(year);
+	current_year = year;
+	wave = 0;
+	if (year >= 2005) { wave = 5 }
+	if (year <= 2004 && year >= 1999) { wave = 4 }
+	if (year <= 1998 && year >= 1995) { wave = 3 }
+	if (year <= 1994 && year >= 1990) { wave = 2 }
+	if (year <= 1984 ) { wave = 1 }
+	data = data_csv.filter(function(d) { return d["Wave"]==wave});
+	map.data = data;
+	map.update();
+	
+	printChart(data);
+	 
+}
+function redrawOnColumn(column){
+	map.column(column).update();
+}
+
+
+$(function() {
+
+  $('#selected_data_type').on('change', function(){
+    var selected = $(this).find("option:selected");
+    redrawOnColumn(selected.val());
+	$('#legend_text').html(selected.text());
+	
+  });
+  
+  d3.select('svg').on("dblclick", function() { //Onclick function
+    console.log(d3.event.explicitOriginalTarget.__data__.id);
+	pushOrRemove(country_to_display,d3.event.explicitOriginalTarget.__data__.id);
+	printChart(map.data);
+	printChart1(GDP);
+
+	
+});
+  
+});
+
+
+
+
+</script>
+
+
+</body>
+
+</html>

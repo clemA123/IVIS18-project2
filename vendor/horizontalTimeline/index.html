@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700,900|Fira+Sans:400,400italic' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+  	
+	<title>Horizontal Timeline | CodyHouse</title>
+</head>
+<body>
+<section class="cd-horizontal-timeline">
+	<div class="timeline">
+		<div class="events-wrapper">
+			<div class="events">
+				<ol>
+					<li><a href="#0" data-date="01/01/2014" class="selected">16 Jan</a></li>
+					<li><a href="#" onclick="console.log($(this).data('date').slice(-4)); return false;"  data-date="01/01/2015">2015</a></li>
+					<li><a href="#0" data-date="01/01/2016">20 Mar</a></li>
+					<li><a href="#0" data-date="01/01/2017">20 May</a></li>
+					<li><a href="#0" data-date="01/01/2018">09 Jul</a></li>
+					<li><a href="#0" data-date="01/01/2019">30 Aug</a></li>
+					<li><a href="#0" data-date="01/01/2020">15 Sep</a></li>
+					<li><a href="#0" data-date="01/01/2021">01 Nov</a></li>
+					<li><a href="#0" data-date="01/01/2022">10 Dec</a></li>
+					<li><a href="#0" data-date="01/01/2023">29 Jan</a></li>
+					<li><a href="#0" data-date="01/01/2024">3 Mar</a></li>
+				</ol>
+
+				<span class="filling-line" aria-hidden="true"></span>
+			</div> <!-- .events -->
+		</div> <!-- .events-wrapper -->
+			
+		<ul class="cd-timeline-navigation">
+			<li><a href="#0" class="prev inactive">Prev</a></li>
+			<li><a href="#0" class="next">Next</a></li>
+		</ul> <!-- .cd-timeline-navigation -->
+	</div> <!-- .timeline -->
+
+</section>
+	
+<script src="js/jquery-2.1.4.js"></script>
+<script src="js/jquery.mobile.custom.min.js"></script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+</body>
+</html>
