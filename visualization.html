@@ -469,8 +469,10 @@ $(function() {
   d3.select('svg').on("dblclick", function() { //Onclick function
 	console.log("in");
 	console.log(d3.event);
-    console.log(d3.event.explicitOriginalTarget.__data__.id);
-	pushOrRemove(country_to_display,d3.event.explicitOriginalTarget.__data__.id);
+	var target = d3.event.explicitOriginalTarget.__data__ || d3.event.srcElement.__data__; //Firefox or Chrome
+	console.log(target);
+    console.log(target.id);
+	pushOrRemove(country_to_display,target.id);
 	printChart(map.data);
 	printChart1(GDP);
 
