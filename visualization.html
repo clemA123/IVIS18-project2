@@ -224,6 +224,7 @@ var life_expt;
 var GDP;
 var energy_use;
 var agriculture_land;
+var target;
 
 function pushOrRemove(array, element) {
     const index = array.indexOf(element);
@@ -469,10 +470,13 @@ $(function() {
   d3.select('svg').on("dblclick", function() { //Onclick function
 	console.log("in");
 	console.log(d3.event);
-	var target = d3.event.explicitOriginalTarget.__data__ || d3.event.srcElement.__data__; //Firefox or Chrome
-	console.log(target);
-    console.log(target.id);
-	pushOrRemove(country_to_display,target.id);
+	if ( ! d3.event.explicitOriginalTarget) //Chrome
+		target = d3.event.srcElement;
+	else
+		target = d3.event.explicitOriginalTarget;
+    console.log(target);
+	console.log(target.__data__.id);
+	pushOrRemove(country_to_display,target.__data__.id);
 	printChart(map.data);
 	printChart1(GDP);
 
