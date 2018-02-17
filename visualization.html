@@ -458,7 +458,7 @@ function redrawOnColumn(column){
 }
 
 
-$(function() {
+window.onload = function() {
 
   $('#selected_data_type').on('change', function(){
     var selected = $(this).find("option:selected");
@@ -468,14 +468,12 @@ $(function() {
   });
   
   d3.select('svg').on("dblclick", function() { //Onclick function
-	console.log("in");
-	console.log(d3.event);
+
 	if ( ! d3.event.explicitOriginalTarget) //Chrome
 		target = d3.event.srcElement;
 	else
 		target = d3.event.explicitOriginalTarget;
-    console.log(target);
-	console.log(target.__data__.id);
+    
 	pushOrRemove(country_to_display,target.__data__.id);
 	printChart(map.data);
 	printChart1(GDP);
@@ -483,7 +481,7 @@ $(function() {
 	
 });
   
-});
+};
 
 
 
