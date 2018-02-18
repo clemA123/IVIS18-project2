@@ -458,7 +458,7 @@ function redrawOnColumn(column){
 }
 
 
-window.onload = function() {
+function actionOnLoad() {
 
   $('#selected_data_type').on('change', function(){
     var selected = $(this).find("option:selected");
@@ -468,20 +468,39 @@ window.onload = function() {
   });
   
   d3.select('svg').on("dblclick", function() { //Onclick function
-
 	if ( ! d3.event.explicitOriginalTarget) //Chrome
 		target = d3.event.srcElement;
 	else
 		target = d3.event.explicitOriginalTarget;
-    
 	pushOrRemove(country_to_display,target.__data__.id);
 	printChart(map.data);
 	printChart1(GDP);
+	
+	});
+	
+	//relaunch it after 3sec for issues with some browsers
+	
+	 setTimeout(function(){
+	   d3.select('svg').on("dblclick", function() { //Onclick function
+	if ( ! d3.event.explicitOriginalTarget) //Chrome
+		target = d3.event.srcElement;
+	else
+		target = d3.event.explicitOriginalTarget;
+	pushOrRemove(country_to_display,target.__data__.id);
+	printChart(map.data);
+	printChart1(GDP);
+	
+	});
+	 
+        
+    }, 3000);
 
 	
-});
+
   
 };
+
+window.onload = actionOnLoad;
 
 
 
